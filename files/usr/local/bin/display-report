@@ -1,0 +1,9 @@
+#!/bin/bash
+REPORT_DIR=$1
+REPORT_FILE=$2
+
+[ ! -e $REPORT_DIR/$REPORT_FILE ] && echo "The report $REPORT_DIR/$REPORT_FILE doesn't exist" && exit 1
+
+cd $REPORT_DIR
+cat $REPORT_FILE | jq -acsRM '{"report":"'$REPORT_FILE'","message":.}'
+rm $REPORT_FILE
